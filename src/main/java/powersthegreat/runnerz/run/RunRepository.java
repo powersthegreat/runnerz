@@ -3,6 +3,7 @@ package powersthegreat.runnerz.run;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +17,25 @@ public class RunRepository {
         return runs;
     }
 
-    Run findById(Integer id) {
+    Optional<Run> findById(Integer id) {
         return runs.stream()
                    .filter(run -> run.id() == id)
-                   .findFirst()
-                   .get();
+                   .findFirst();
+    }
+
+    void create(Run run) {
+        runs.add(run);
+    }
+
+    void update(Run run, Integer id) {
+        Optional<Run> existingRun = findById(run.id());
+        if (existingRun.isPresent()) {
+            runs.set(runs.indexOf(existingRun.get()), run);
+        }
+    }
+
+    void delete(Integer id) {
+        runs.removeIf(run -> run.id() == id);
     }
 
     @PostConstruct
