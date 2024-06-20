@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.http.HttpStatus; 
 
-
 import java.util.List;
 import java.util.Optional;
 
@@ -16,7 +15,6 @@ public class RunController {
 
     private final RunRepository runRepository;
 
-    @Autowired
     public RunController(RunRepository runRepository) {
         this.runRepository = runRepository;
     }
@@ -43,10 +41,10 @@ public class RunController {
     }
 
     // put
-    @ResponseStatus(HttpStatus.NO_CONTENT) // 204
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{id}")
     void update(@Valid @RequestBody Run run, @PathVariable Integer id) {
-        runRepository.update(run, id);
+        runRepository.update(run,id);
     }
 
     // delete

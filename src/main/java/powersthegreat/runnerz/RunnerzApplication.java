@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 
 import powersthegreat.runnerz.run.Run;
 import powersthegreat.runnerz.run.Location;
+import powersthegreat.runnerz.run.RunRepository;
 
 @SpringBootApplication
 public class RunnerzApplication {
@@ -22,11 +23,13 @@ public class RunnerzApplication {
 		log.info("RunnerzApplication started successfully!");
 	}
 
-	@Bean
-    CommandLineRunner runner() {
-        return args -> {
-            Run run = new Run(1, "Morning Run", LocalDateTime.now(), LocalDateTime.now().plusHours(1), 5, Location.OUTDOOR);
-            log.info("Run: {}", run);
-        };
-    }
+	// @Bean
+    // CommandLineRunner runner(RunRepository runRepository) {
+    //     return args -> {
+    //         Run run = new Run(1, "Morning Run", LocalDateTime.now(), LocalDateTime.now().plusHours(1), 5, Location.OUTDOOR);
+    //         runRepository.create(run);
+    //     };
+    // }
+
+    
 }
