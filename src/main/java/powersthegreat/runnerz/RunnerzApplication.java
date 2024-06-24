@@ -8,10 +8,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import powersthegreat.runnerz.run.Run;
 import powersthegreat.runnerz.run.Location;
 import powersthegreat.runnerz.run.RunRepository;
+import powersthegreat.runnerz.user.UserRestClient;
+import powersthegreat.runnerz.user.User;
 
 @SpringBootApplication
 public class RunnerzApplication {
@@ -23,13 +26,12 @@ public class RunnerzApplication {
 		log.info("RunnerzApplication started successfully!");
 	}
 
-	// @Bean
-    // CommandLineRunner runner(RunRepository runRepository) {
-    //     return args -> {
-    //         Run run = new Run(1, "Morning Run", LocalDateTime.now(), LocalDateTime.now().plusHours(1), 5, Location.OUTDOOR);
-    //         runRepository.create(run);
-    //     };
-    // }
-
+    @Bean
+    CommandLineRunner runner(UserRestClient client) {
+        return args -> {
+            List<User> users = client.findAll();
+            System.out.println(users);
+        };
+    }
     
 }
